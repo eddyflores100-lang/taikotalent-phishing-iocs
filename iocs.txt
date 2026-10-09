@@ -1,0 +1,25 @@
+# taikotalent.xyz fake-recruiter terminal trojan — IoC list (v2, 2026-10-09)
+# format: type,value,context
+domain,taikotalent.xyz,phishing portal + payload host (registered 2026-09-27, Namecheap)
+domain,hr.taikotalent.xyz,sending subdomain (DKIM d=, MX -> AWS SES inbound sa-east-1)
+domain,gaganata.ink,C2 (Namecheap, Cloudflare-fronted)
+domain,fallgganata.ink,C2 backup
+url,https://taikotalent.xyz/,private-invitation portal (Ref-code gated)
+url,https://taikotalent.xyz/verify_m,macOS/Linux bash stager (49,916 B) - LIVE 2026-10-09
+url,https://taikotalent.xyz/verify_w,Windows payload (v.cmd launcher)
+url,https://api.gaganata.ink/guard-launcher-result,install-status C2 beacon
+url,https://api.fallgganata.ink,C2 fallback
+ip,23.249.215.58,Amazon SES sending IP (sa-east-1, via Resend)
+ip,193.160.32.10,payload host (Shock Hosting, US-SHOCK1-20191118)
+ip,172.67.196.60,Cloudflare edge in front of C2
+email-addr,josephquintana@hr.taikotalent.xyz,fake recruiter identity
+email-subject,Engineering opening - Taiko,lure
+filename,verify_m,stager download
+filename,verify_w,windows payload download
+filename,v.cmd,windows launcher
+filepath,/var/tmp/.kdm.*,second stage (base64-decoded, self-deleting)
+mutex/process-name,deepfake_guard,stager process name
+sha256,c7c22e322c17bda8198257342d4034af6250a5c433242461b870879ba9aa285d,verify_m stager (identical 10-05 quarantine & 10-09 live fetch)
+sha256,84d94746ea1e4642e00bbd6250f8e4fabfeff66b76acd040bb2219412195d564,original phishing email raw
+sha256,3a5bb258d76a048d0c3ff8c3671410998ef548968e1ea674b5a9dd367fa3bcf3,original .eml attachment
+sha256,d83bc2d16a1b91e839d8d9ec440b79fe09e73c92bd2a151b843c0182cd604a1c,17-page forensic report PDF
