@@ -1,9 +1,20 @@
 # taikotalent.xyz — Fake-Recruiter Terminal Trojan (IoCs & Detection)
 
-> **Status @ 2026-10-09 00:46 UTC: THE PAYLOAD IS STILL LIVE.**
-> `https://taikotalent.xyz/verify_m` → HTTP 200, 49,916 bytes — **byte-identical** to the sample quarantined on 2026-10-05 — 4+ days after the AWS abuse report (case `P01M4696RCMDN90PYQGW7NJHGT0` / `179121234700301`).
+> **UPDATE 2026-10-15 — PHISHING DOMAIN TAKEN DOWN.** `taikotalent.xyz` and `hr.taikotalent.xyz` now return **NXDOMAIN** (checked via DNS-over-HTTPS, 2026-10-15) — 10 days after the coordinated reports of Oct 5 (AWS case `179121234700301`, NameCheap ticket `NC-DFA-2100`, 13 notified channels). The payload URLs (`/verify_m`, `/verify_w`) no longer resolve.
+>
+> **PARTIALLY RESOLVED — the C2 layer is still live:** `api.gaganata.ink` (104.21.84.196 / 172.67.196.60) and `api.fallgganata.ink` still resolve behind Cloudflare and answer HTTP (404 on probe, 2026-10-15). Abuse reports for the `gaganata.ink` / `fallgganata.ink` domains remain pending with the registrar and Cloudflare (abuse form requires browser + Turnstile).
+>
+> **Status @ 2026-10-09 00:46 UTC (historical):** payload still live — `https://taikotalent.xyz/verify_m` → HTTP 200, 49,916 bytes, byte-identical to the Oct 5 sample, 4+ days after the AWS abuse report.
 
 A targeted phishing campaign impersonating **Taiko** (the Ethereum rollup company — real domain `taiko.xyz`, **no affiliation** with `taikotalent.xyz`) sends fake "Engineering opening" recruiting emails to open-source developers, harvested from their public GitHub profiles. The fake "application portal" ends in an **"Anti-bot check with Terminal"** page that talks the victim into pasting a downloader command into their **own terminal** — no exploit needed, the user executes the malware themselves.
+
+## Takedown timeline
+
+| Date (UTC) | Event |
+|---|---|
+| 2026-10-05 | Campaign received; sample quarantined; full forensic report sent (AWS case `179121234700301`, Resend, Taiko) |
+| 2026-10-09 | Disclosure expanded: this repo, gist, dev.to, GitLab snippet, Telegraph; 9 more notifications incl. NameCheap abuse (→ ticket `NC-DFA-2100`), Softshellweb (payload host), Cloudflare (C2), APWG, OpenPhish, oss-security, 3 media outlets. Payload still byte-identical & live |
+| 2026-10-15 | **`taikotalent.xyz` / `hr.taikotalent.xyz` → NXDOMAIN.** Phishing infrastructure down 10 days after first report. C2 (`api.gaganata.ink`, `api.fallgganata.ink`) still resolving behind Cloudflare |
 
 ## Why this matters
 
