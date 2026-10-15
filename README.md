@@ -1,5 +1,8 @@
 # taikotalent.xyz — Fake-Recruiter Terminal Trojan (IoCs & Detection)
 
+> **STATUS: TAKEN DOWN.** The malicious domain `taikotalent.xyz` was suspended by its registrar (`clientHold`) on **2026-10-10 at 02:39 UTC** — ~12 hours after our evidence-backed follow-up to AWS abuse with the payload still live. Verified 2026-10-15 via RDAP and DNS. Details in the timeline below.
+
+
 > **UPDATE 2026-10-15 — PHISHING DOMAIN TAKEN DOWN.** `taikotalent.xyz` and `hr.taikotalent.xyz` now return **NXDOMAIN** (checked via DNS-over-HTTPS, 2026-10-15) — 10 days after the coordinated reports of Oct 5 (AWS case `179121234700301`, NameCheap ticket `NC-DFA-2100`, 13 notified channels). The payload URLs (`/verify_m`, `/verify_w`) no longer resolve.
 >
 > **PARTIALLY RESOLVED — the C2 layer is still live:** `api.gaganata.ink` (104.21.84.196 / 172.67.196.60) and `api.fallgganata.ink` still resolve behind Cloudflare and answer HTTP (404 on probe, 2026-10-15). Abuse reports for the `gaganata.ink` / `fallgganata.ink` domains remain pending with the registrar and Cloudflare (abuse form requires browser + Turnstile).
@@ -104,12 +107,16 @@ find ~ -maxdepth 2 \( -name 'verify_m' -o -name 'verify_w' -o -name 'v.cmd' \) 2
 | 2026-10-06 | 17-page forensic report generated (hash `d83bc2d16a1b91e8…`) |
 | 2026-10-07 | AWS routes the case to email-abuse@amazon.com |
 | 2026-10-09 | Full public disclosure: [IoC gist](https://gist.github.com/eddyflores100-lang/198d8a13ba5901ea8ed7c63d5292c6ff) · [technical write-up](https://dev.to/edison_flores_6d2cd381b13/a-fake-recruiter-sent-me-a-job-offer-that-ended-in-my-terminal-the-trojan-is-still-live-2okf) · this repo; payload re-verified **live & byte-identical** |
+| 2026-10-09 (later) | Follow-up re-sent to email-abuse@amazon.com with **live-payload** status; infrastructure mapped via RDAP: registrar **NameCheap**, payload host `193.160.32.10` (Softshell/SHOCK1 netblock, abuse contact softshellweb.com), C2 behind **Cloudflare**; abuse reports sent to all three providers + APWG, OpenPhish, oss-security + 3 media outlets (13 channels total) |
+| 2026-10-10 02:39 UTC | **RESOLVED — registrar takedown.** RDAP now shows `clientHold` + `server transfer prohibited` on taikotalent.xyz, applied ~12 h after the live-payload follow-up. Domain lived 13 days (registered 2026-09-27, suspended 2026-10-10) |
+| 2026-10-15 | Verified dead: `taikotalent.xyz`, `hr.` and `www.` return no DNS; payload `/verify_m` unreachable; C2 `api.gaganata.ink` still resolves behind Cloudflare but returns HTTP 404 — remnant only relevant to hosts already infected before the takedown |
 
 ## References
 
 - Technical write-up (dev.to): https://dev.to/edison_flores_6d2cd381b13/a-fake-recruiter-sent-me-a-job-offer-that-ended-in-my-terminal-the-trojan-is-still-live-2okf
 - IoC gist: https://gist.github.com/eddyflores100-lang/198d8a13ba5901ea8ed7c63d5292c6ff
 - AWS abuse case: `P01M4696RCMDN90PYQGW7NJHGT0` / `179121234700301`
+- Registrar takedown proof (RDAP 2026-10-15): clientHold applied 2026-10-10T02:39:30Z
 
 ## Credits & methodology
 
